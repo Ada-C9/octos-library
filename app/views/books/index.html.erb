@@ -5,8 +5,8 @@
 <ul>
 <% @books.each do |book| %>
   <li>
-    <strong><%= book[:title] %></strong>
-     By: <%= book[:author] %>
+    <strong><%= book.title %></strong>
+     By: <%= book.author %>
   </li>
 <% end %>
 </ul>
