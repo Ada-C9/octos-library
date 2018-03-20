@@ -18,6 +18,13 @@ class BooksController < ApplicationController
   end
 
   def show
+    # Figure out which book the user wanted
+    book_id = params[:id]
+
+
+    # Load it from the DB
+    # Save it in an instance variable for the view
+    @book = { title: "The left hand of darkness", author: "Ursula K. Le Guin"}
   end
 
   def edit
