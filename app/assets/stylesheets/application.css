@@ -17,3 +17,13 @@
  header h1 {
    background-color: lightskyblue;
  }
+
+ img.logo {
+   height: 100px;
+   width: 100px;
+   /* float: left; */
+ }
+
+ a {
+   color: green;
+ }
