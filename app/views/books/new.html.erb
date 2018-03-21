@@ -1,0 +1,13 @@
+<form action="/books" method="post" accept-charset="utf-8">
+  <!-- SPECIAL INPUT TO ALLOW RAILS TO USE THIS FORM -->
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+
+  <label for="my_title">Title</label>
+  <input type="text" name="my_title" value="" id="my_title">
+
+  <label for="author">Author</label>
+  <input type="text" name="author" value="" id="author">
+
+  <input type="submit" value="Create Book">
+</form>

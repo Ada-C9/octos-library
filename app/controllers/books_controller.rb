@@ -1,15 +1,15 @@
 class BooksController < ApplicationController
   def index
-    # Placeholder book data until we get models tomorrow!
-    # @my_string = "yelling"
-
     @books = Book.all
   end
 
-  def new
-  end
+  def new; end
 
   def create
+    book = Book.new(title: params[:my_title], author: params[:author])
+    if book.save
+      redirect_to '/books'
+    end
   end
 
   def show
