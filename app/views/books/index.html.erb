@@ -5,10 +5,19 @@
 <ul>
 <% @books.each do |book| %>
   <li>
-    <strong><%= book.title %></strong>
-     By: <%= book.author %>
+    <strong><%= link_to(book.title, book_path(book)) %></strong>
+
+    By: <%= book.author %>
+    <!-- <a href="/books/#{book.id}">Go to it now!</a> -->
+
+    <%= link_to("Edit", edit_book_path(book)) %>
+
+    <%= link_to("Go find it on google", "http://www.google.com/search?q=#{book.title}") %>
   </li>
 <% end %>
 </ul>
 
-<a href="/books/new">Add a New Book</a>
+
+<%= link_to("Add a New Book", new_book_path, class: "important") %>
+
+<!-- <a href="/books/new" class="important">Add a New Book</a> -->
