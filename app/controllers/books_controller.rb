@@ -52,15 +52,15 @@ class BooksController < ApplicationController
     # book.publication_date = raw_book[:publication_date]
     # book.synopsis = raw_book[:synopsis]
 
-    # Or we can do it all together with update_attributes
-    book.update_attributes(
+    # Or we can do it all together with assign_attributes
+    book.assign_attributes(
       title: raw_book[:title],
       author: raw_book[:author],
       publication_date: raw_book[:publication_date],
       synopsis: raw_book[:synopsis]
     )
 
-    # Arbitrary rule: always use update_attributes, not
+    # Arbitrary rule: always use assign_attributes, not
     # update. This will pay off later.
 
     if book.save
