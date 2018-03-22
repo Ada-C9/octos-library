@@ -11,6 +11,7 @@
     <!-- <a href="/books/#{book.id}">Go to it now!</a> -->
 
     <%= link_to("Edit", edit_book_path(book)) %>
+    <%= link_to("Delete", book_path(book.id), method: :delete, data: { confirm: "Are you sure you want to delete Book #{ book.title }?" }) %>
 
     <%= link_to("Go find it on google", "http://www.google.com/search?q=#{book.title}") %>
   </li>
