@@ -23,7 +23,8 @@ class BooksController < ApplicationController
     # book.title = params[:book][:title]
 
     if book.save
-      redirect_to '/books'
+      # redirect_to '/books'
+      redirect_to books_path
     end
   end
 
@@ -69,5 +70,11 @@ class BooksController < ApplicationController
   end
 
   def destroy
+    # find it first
+    # check the result of destroy
+    
+    Book.destroy(params[:id])
+
+    redirect_to books_path
   end
 end
