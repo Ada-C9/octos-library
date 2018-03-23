@@ -1,15 +1,1 @@
-<%= form_for @book do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-
-  <%= f.label :author, "Auttttthor" %>
-  <%= f.text_field :author %>
-
-  <%= f.label :publication_date %>
-  <%= f.date_field :publication_date %>
-
-  <%= f.label :synopsis %>
-  <%= f.text_area :synopsis %>
-
-  <%= f.submit "Shelve it!" %>
-<% end %>
+<%= render partial: "form" %>
