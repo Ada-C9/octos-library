@@ -11,13 +11,7 @@ class BooksController < ApplicationController
     # Rails form_for creates a nested param structure
     # This is fancy and good, but means we need to do
     # a little extra work.
-    raw_book = params[:book]
-
-    book = Book.new
-    book.title = raw_book[:title]
-    book.author = raw_book[:author]
-    book.publication_date = raw_book[:publication_date]
-    book.synopsis = raw_book[:synopsis]
+    book = Book.new(book_params)
 
     # Could also say:
     # book.title = params[:book][:title]
@@ -32,7 +26,6 @@ class BooksController < ApplicationController
     # Figure out which book the user wanted
     book_id = params[:id]
 
-
     # Load it from the DB
     # Save it in an instance variable for the view
     @book = Book.find(book_id)
@@ -43,26 +36,13 @@ class BooksController < ApplicationController
   end
 
   def update
-    raw_book = params[:book]
-
     book = Book.find(params[:id])
 
-    # We could follow the same pattern from create
-    # book.title = raw_book[:title]
-    # book.author = raw_book[:author]
-    # book.publication_date = raw_book[:publication_date]
-    # book.synopsis = raw_book[:synopsis]
-
     # Or we can do it all together with assign_attributes
-    book.assign_attributes(
-      title: raw_book[:title],
-      author: raw_book[:author],
-      publication_date: raw_book[:publication_date],
-      synopsis: raw_book[:synopsis]
-    )
+    book.assign_attributes(book_params)
 
-    # Arbitrary rule: always use assign_attributes, not
-    # update. This will pay off later.
+    # Arbitrary rule: always use assign_attributes,
+    # not update. This will pay off later.
 
     if book.save
       redirect_to book_path(book)
@@ -72,9 +52,14 @@ class BooksController < ApplicationController
   def destroy
     # find it first
     # check the result of destroy
-    
+
     Book.destroy(params[:id])
 
     redirect_to books_path
+  end
+
+  private
+  def book_params
+    return params.require(:book).permit(:title, :author, :synopsis, :publication_date)
   end
 end

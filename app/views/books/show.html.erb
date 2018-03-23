@@ -1,2 +1,5 @@
-<h2>Details for book <%= @book[:title] %></h2>
-<p>Author <%= @book[:author] %></p>
+<h2>Details for book <%= @book.title %></h2>
+<p>Author <%= @book.author %></p>
+<p>Published: <%= @book.publication_date %></p>
+<p>Synopsis: <%= @book.synopsis %></p>
+<%= link_to "Edit this book", edit_book_path(@book) %>
