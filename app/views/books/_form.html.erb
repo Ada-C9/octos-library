@@ -8,7 +8,7 @@
   <%= f.text_field :title %>
 
   <%= f.label :author, "Auttttthor" %>
-  <%= f.text_field :author %>
+  <%= f.select :author_id, Author.all.map{ |auth| [auth.name, auth.id] } %>
 
   <%= f.label :publication_year %>
   <%= f.number_field :publication_year %>

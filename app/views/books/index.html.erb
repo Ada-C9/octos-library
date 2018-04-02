@@ -7,7 +7,7 @@
   <li>
     <strong><%= link_to(book.title, book_path(book)) %></strong>
 
-    By: <%= book.author %>
+    By: <%= book.author.name %>
     <!-- <a href="/books/#{book.id}">Go to it now!</a> -->
 
     <%= link_to("Edit", edit_book_path(book)) %>
