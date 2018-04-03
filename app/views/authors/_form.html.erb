@@ -1,0 +1,15 @@
+<%= form_for @author do |f| %>
+<div>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+</div>
+
+<div>
+  <%= f.label :bio %>
+  <%= f.text_area :bio %>
+</div>
+
+<div>
+  <%= f.submit %>
+</div>
+<% end %>
