@@ -1,5 +1,7 @@
 class Author < ApplicationRecord
   has_many :books # plural
+
+
   def first_published
     my_books = self.books.where.not(publication_year: nil)
     my_books = my_books.order(publication_year: :asc)
