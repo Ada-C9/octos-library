@@ -1,3 +1,5 @@
+<%= render partial: "layouts/error_messages", locals: { model: @author } %>
+
 <%= form_for @author do |f| %>
 <div>
   <%= f.label :name %>

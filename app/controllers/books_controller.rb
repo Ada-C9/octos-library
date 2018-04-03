@@ -39,16 +39,18 @@ class BooksController < ApplicationController
   end
 
   def update
-    book = Book.find(params[:id])
+    @book = Book.find(params[:id])
 
     # Or we can do it all together with assign_attributes
-    book.assign_attributes(book_params)
+    @book.assign_attributes(book_params)
 
     # Arbitrary rule: always use assign_attributes,
     # not update. This will pay off later.
 
-    if book.save
+    if @book.save
       redirect_to book_path(book)
+    else
+      render :edit
     end
   end
 
