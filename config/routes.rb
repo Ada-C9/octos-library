@@ -2,14 +2,20 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'books#index'
 
-  get '/books', to: 'books#index', as: 'books'
-  get '/books/new', to: 'books#new', as: 'new_book'
-  post '/books', to: 'books#create'
+  # get '/books/new_with_cover_photo'
+  resources :books do
 
-  get '/books/:id', to: 'books#show', as: 'book'
-  get '/books/:id/edit', to: 'books#edit', as: 'edit_book'
-  patch '/books/:id', to: 'books#update'
-  delete '/books/:id', to: 'books#destroy'
+    # non-RESTful routes can be specified in a block
+    # post '/check_out', to: 'books#check_out', as: 'check_out_book'
+  end
+
+  # or you can type them out manually
+  # post '/books/:id/check_out', to: 'books#check_out', as: 'check_out_book'
+
 
   resources :authors
+
+  # Or, you can restrict what you want with :only or :except
+  # resources :books, only: [:index, :new, :create]
+  # resources :authors, except: [:destroy]
 end

@@ -3,6 +3,22 @@
   <%= page_title %>
 </h4>
 
+<% if @book.errors.messages.any? %>
+  <section class="error-messages">
+    <h3>There were some problems</h3>
+    <ul>
+      <% @book.errors.messages.each do |field, problems| %>
+        <% problems.each do |problem| %>
+          <li>
+            <strong><%= field %></strong>
+            <%= problem %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
+
 <%= form_for @book do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %>

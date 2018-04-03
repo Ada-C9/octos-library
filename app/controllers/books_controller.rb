@@ -11,14 +11,17 @@ class BooksController < ApplicationController
     # Rails form_for creates a nested param structure
     # This is fancy and good, but means we need to do
     # a little extra work.
-    book = Book.new(book_params)
+    @book = Book.new(book_params)
 
     # Could also say:
     # book.title = params[:book][:title]
 
-    if book.save
+    if @book.save
       # redirect_to '/books'
       redirect_to books_path
+    else
+      # Validations failed! What do we do?
+      render :new
     end
   end
 
