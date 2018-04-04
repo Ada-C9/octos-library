@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   # post '/books/:id/check_out', to: 'books#check_out', as: 'check_out_book'
 
 
-  resources :authors
+  resources :authors do
+    resources :books, only: [:index, :new]
+  end
 
   # Or, you can restrict what you want with :only or :except
   # resources :books, only: [:index, :new, :create]

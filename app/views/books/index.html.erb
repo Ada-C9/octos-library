@@ -1,6 +1,12 @@
 <!-- <h2>Welcome to the Octos Library!</h2> -->
 
-<p>We have many books sitting around for your reading pleasure</p>
+<p>
+  We have many books
+  <% if @author %>
+    by <%= @author.name %>
+  <% end %>
+  sitting around for your reading pleasure
+</p>
 
 <ul>
 <% @books.each do |book| %>

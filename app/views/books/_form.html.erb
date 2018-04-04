@@ -9,8 +9,17 @@
   <%= f.label :title %>
   <%= f.text_field :title %>
 
-  <%= f.label :author, "Auttttthor" %>
-  <%= f.select :author_id, Author.all.map{ |auth| [auth.name, auth.id] } %>
+  <!--
+  Only show the author dropdown if we don't
+  already have one. Is this acutally good UX
+  design? Depends on the application!
+  -->
+  <% unless @book.author_id %>
+    <%= f.label :author, "Auttttthor" %>
+    <%= f.select :author_id, Author.all.map{ |auth| [auth.name, auth.id] } %>
+  <% else %>
+    <%= f.hidden_field :author_id %>
+  <% end %>
 
   <%= f.label :publication_year %>
   <%= f.number_field :publication_year %>

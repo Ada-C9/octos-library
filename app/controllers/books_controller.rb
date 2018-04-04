@@ -1,10 +1,20 @@
 class BooksController < ApplicationController
   def index
-    @books = Book.all
+    if params[:author_id]
+      # Have an author id
+      @author = Author.find(params[:author_id])
+      @books = @author.books
+      # - or -
+      # @books = Book.where(author_id: params[:author_id])
+    else
+      # No author, load all the books
+      # This is our old, non-nested version
+      @books = Book.all
+    end
   end
 
   def new
-    @book = Book.new
+    @book = Book.new(author_id: params[:author_id])
   end
 
   def create
