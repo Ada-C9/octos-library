@@ -3,3 +3,11 @@
 <p>Published: <%= @book.publication_year %></p>
 <p>Synopsis: <%= @book.synopsis %></p>
 <%= link_to "Edit this book", edit_book_path(@book) %>
+<p>Genres:</p>
+<ul>
+  <% @book.genres.each do |genre| %>
+    <li>
+      <%= genre.name %>
+    </li>
+  <% end %>
+</ul>
