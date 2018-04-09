@@ -49,8 +49,32 @@ describe Book do
   end
 
   describe "relations" do
+    before do
+      @book = Book.new(title: 'test book')
+    end
+
     # author
+    it "connects author and author_id" do
+      # Arrange
+      author = Author.create!
+
+      # Act
+      @book.author = author
+
+      # Assert
+      @book.author_id.must_equal author.id
+    end
 
     # genres
+    it "connects genres and genre_ids" do
+      # Arrange
+      genre = Genre.create!(name: "test genre")
+
+      # Act
+      @book.genres << genre
+
+      # Assert
+      @book.genre_ids.must_include genre.id
+    end
   end
 end
