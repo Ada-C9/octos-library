@@ -1,7 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
+metz:
+  name: Sandi Metz
+  bio: expert programmer and author
 
-two:
-  name: MyString
+leguin:
+  name: Ursula K. Le Guin

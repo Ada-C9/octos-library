@@ -9,7 +9,15 @@ describe Book do
       # test DB. Use create! to fail fast - we aren't
       # interested in the author, but we need our
       # tests to be invalid if we can't have one
-      author = Author.create!(name: "test author")
+
+      # There are a variety of ways to access fixture data
+      # author = Author.find_by(name: "Sandi Metz")
+      # author = authors(:metz)
+      author = Author.first
+
+      # IDs are assigned at random, so this will not work
+      # Author.find(3)
+
       @book = Book.new(title: "test book", author: author)
     end
 
@@ -37,9 +45,8 @@ describe Book do
 
     # duplicate title -> fail
     it "is invalid with a duplicate title" do
-      title = "duplicate"
-      Book.create!(title: title, author: Author.first)
-      @book.title = title
+      dup_book = Book.first
+      @book.title = dup_book.title
 
       result = @book.valid?
 
@@ -56,7 +63,7 @@ describe Book do
     # author
     it "connects author and author_id" do
       # Arrange
-      author = Author.create!
+      author = Author.first
 
       # Act
       @book.author = author
@@ -68,13 +75,15 @@ describe Book do
     # genres
     it "connects genres and genre_ids" do
       # Arrange
-      genre = Genre.create!(name: "test genre")
+      genre = Genre.first
 
       # Act
       @book.genres << genre
 
       # Assert
       @book.genre_ids.must_include genre.id
+
+      puts books(:poodr).id
     end
   end
 end
