@@ -3,6 +3,7 @@
 poodr:
   title: Practical Object-Oriented Design in Ruby
   author: metz
+  genres: history, nonfiction
 
 poodr2:
   title: Other poodr
