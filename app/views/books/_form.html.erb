@@ -32,5 +32,5 @@
   <%= collection_check_boxes(:book, :genre_ids, Genre.all, :id, :name) %>
   </div>
 
-  <%= f.submit %>
+  <%= f.submit class: "button" %>
 <% end %>
