@@ -28,9 +28,12 @@ class BooksController < ApplicationController
 
     if @book.save
       # redirect_to '/books'
+      flash[:success] = "Book added successfully"
       redirect_to books_path
     else
       # Validations failed! What do we do?
+      # This flash message is redundant but for demonstration purposes
+      flash.now[:failure] = "Validations Failed"
       render :new
     end
   end
