@@ -20,6 +20,14 @@
           <li><%= link_to "New book", new_book_path %></li>
           <li><%= link_to "All authors", authors_path %></li>
           <li><%= link_to "New author", new_author_path %></li>
+
+          <li>
+            <% if session[:author_id] %>
+              <%= link_to "Logout", logout_path, method: :delete %>
+            <% else %>
+              <%= link_to "Login", login_path %>
+            <% end %>
+          </li>
         </ul>
       </nav>
     </header>

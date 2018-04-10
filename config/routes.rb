@@ -17,6 +17,10 @@ Rails.application.routes.draw do
     resources :books, only: [:index, :new]
   end
 
+  get '/login', to: 'sessions#new', as: 'login'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy', as: 'logout'
+
   # Or, you can restrict what you want with :only or :except
   # resources :books, only: [:index, :new, :create]
   # resources :authors, except: [:destroy]
