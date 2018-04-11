@@ -1,0 +1,15 @@
+language: ruby
+rvm:
+- 2.5.0
+services:
+- postgresql
+before_script:
+- bin/rails db:create
+- bin/rails db:migrate
+deploy:
+  provider: heroku
+  api_key:
+    secure: AuH2i/K/fYQ3IwZojPCM8ikasM25/sLW33A+so/A9vtViLJVKiYC/p3/QwDlPTx6OV/fwItLxutQEEez1EQ77sgA8fQIdTtzCenQNLQupmS+eBgzmSc8nI59GLs1ENjXfSK3gApNYaiCBQ8isd/k0ZYeLY8y2iL31eYvyU/yVXOepZrANusQI9ezkXUb0dQIYgr6lMAVJ6eI0Kz4UrIODFq/kZzswnnMHv8swkoMEkIEHcdU1TJ4MjbyEDPqQ5SeM2IqgaTyhXu/epgUV6Arid7DcR28/MGOEovu4Pc1cjfoaMCCe26DtSBS0Q4gE0wRYsEkLYk/GSzvq2JTvu6mTF8qVeau+B4v8FnzyAum9ty/kuKN+EgQiG0l90NHnLULo63LoahIRpUaOIuq3aADSq9inOeb7wzt8kHRKvA7kE/nxZRzuP0r6OqBtwr5XBckjeiZgIzu+mQpjeVT7RBTikta2sixNlIGFss26i4B+txVXnT0UKEMw8673NJKMgq8hXoLtlO1TpDTPwY37Yi5p0ZwuhMHBdjM6Bs5W2UaqccOsaBQqbRGOuhsatfud/JvsEiIBmF/0MsFGPFjCOm78aPUFTi/aAP6kOLp/U/PFfco7AfXATTolqxNBG2JKFTy+QNeikqqImG2Je/uJmq3hVbUmihETkirE17Mh7tCZFw=
+  app: ada-c9-octos-library
+  on:
+    repo: Ada-C9/octos-library
