@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  before_action :find_book, only: [:show, :edit, :update]
+
   def index
     if params[:author_id]
       # Have an author id
@@ -38,22 +40,11 @@ class BooksController < ApplicationController
     end
   end
 
-  def show
-    # Figure out which book the user wanted
-    book_id = params[:id]
+  def show; end
 
-    # Load it from the DB
-    # Save it in an instance variable for the view
-    @book = Book.find(book_id)
-  end
-
-  def edit
-    @book = Book.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @book = Book.find(params[:id])
-
     # Or we can do it all together with assign_attributes
     @book.assign_attributes(book_params)
 
@@ -77,7 +68,12 @@ class BooksController < ApplicationController
   end
 
   private
+
   def book_params
     return params.require(:book).permit(:title, :author_id, :synopsis, :publication_year, genre_ids: [])
+  end
+
+  def find_book
+    @book = Book.find(params[:id])
   end
 end
