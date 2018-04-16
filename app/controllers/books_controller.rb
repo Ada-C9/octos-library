@@ -36,7 +36,7 @@ class BooksController < ApplicationController
       # Validations failed! What do we do?
       # This flash message is redundant but for demonstration purposes
       flash.now[:failure] = "Validations Failed"
-      render :new
+      render :new, status: :bad_request
     end
   end
 
