@@ -95,4 +95,104 @@ describe BooksController do
       must_respond_with :not_found
     end
   end
+
+  describe 'edit' do
+    it 'sends success if the book exists' do
+      get edit_book_path(Book.first)
+      must_respond_with :success
+    end
+
+    it 'sends not_found if the book D.N.E.' do
+      # Get an invalid book ID somehow
+      # more than one way to do this
+      book_id = Book.last.id + 1
+
+      get edit_book_path(book_id)
+
+      must_respond_with :not_found
+    end
+  end
+
+  describe 'update' do
+    it 'updates an existing book with valid data' do
+      # Arrange
+      book = Book.first
+      book_data = book.attributes
+      book_data[:title] = "some updated title"
+
+      # Assumptions
+      book.assign_attributes(book_data)
+      book.must_be :valid?
+
+      # Act
+      patch book_path(book), params: { book: book_data }
+
+      # Assert
+      must_redirect_to book_path(book)
+      # Need to read the actual value from the
+      # DB, not from our local variable
+      # Book.first.title.must_equal book_data[:title]
+      book.reload
+      book.title.must_equal book_data[:title]
+    end
+
+    it 'sends bad_request for invalid data' do
+      # Arrange
+      book = Book.first
+      book_data = book.attributes
+      book_data[:title] = ""
+
+      # Assumptions
+      book.assign_attributes(book_data)
+      book.wont_be :valid?
+
+      # Act
+      patch book_path(book), params: { book: book_data }
+
+      # Assert
+      must_respond_with :bad_request
+
+      # Need to read the actual value from the
+      # DB, not from our local variable
+      # Book.first.title.must_equal book_data[:title]
+      book.reload
+      book.title.wont_equal book_data[:title]
+    end
+
+    it 'sends not_found for a book that D.N.E.' do
+      book_id = Book.last.id + 1
+
+      patch book_path(book_id)
+
+      must_respond_with :not_found
+    end
+  end
+
+  describe 'destroy' do
+    it 'destroys a real book' do
+      # Arrange
+      book_id = Book.first.id
+      old_book_count = Book.count
+
+      # Act
+      delete book_path(book_id)
+
+      # Assert
+      must_respond_with :redirect
+      must_redirect_to books_path
+
+      Book.count.must_equal old_book_count - 1
+      Book.find_by(id: book_id).must_be_nil
+    end
+
+    it 'sends not_found when the book D.N.E' do
+      book_id = Book.last.id + 1
+      old_book_count = Book.count
+
+      delete book_path(book_id)
+
+      must_respond_with :not_found
+      Book.count.must_equal old_book_count
+    end
+  end
 end

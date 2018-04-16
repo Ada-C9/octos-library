@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :find_book, only: [:show, :edit, :update]
+  before_action :find_book, only: [:show, :edit, :update, :destroy]
 
   def index
     if params[:author_id]
@@ -52,17 +52,16 @@ class BooksController < ApplicationController
     # not update. This will pay off later.
 
     if @book.save
-      redirect_to book_path(book)
+      redirect_to book_path(@book)
     else
-      render :edit
+      render :edit, status: :bad_request
     end
   end
 
   def destroy
     # find it first
     # check the result of destroy
-
-    Book.destroy(params[:id])
+    @book.destroy
 
     redirect_to books_path
   end
