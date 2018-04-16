@@ -79,5 +79,20 @@ describe BooksController do
     end
   end
 
-  
+  describe 'show' do
+    it 'sends success if the book exists' do
+      get book_path(Book.first)
+      must_respond_with :success
+    end
+
+    it 'sends not_found if the book D.N.E.' do
+      # Get an invalid book ID somehow
+      # more than one way to do this
+      book_id = Book.last.id + 1
+
+      get book_path(book_id)
+
+      must_respond_with :not_found
+    end
+  end
 end

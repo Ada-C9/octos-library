@@ -74,6 +74,12 @@ class BooksController < ApplicationController
   end
 
   def find_book
-    @book = Book.find(params[:id])
+    @book = Book.find_by(id: params[:id])
+    # @book will be nil if the find_by failed
+    # head is similar to render, except it doesn't run
+    #   a view template, so the browser only gets the status code
+    # This is not the only thing you can do in this scenario
+    #   but it is the simplest
+    head :not_found unless @book
   end
 end
