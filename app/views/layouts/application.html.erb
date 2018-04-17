@@ -26,10 +26,10 @@
           <li><%= link_to "New author", new_author_path, class: "hollow button" %></li>
 
           <li>
-            <% if session[:author_id] %>
+            <% if session[:user_id] %>
               <%= link_to "Logout", logout_path, method: :delete, class: "hollow button" %>
             <% else %>
-              <%= link_to "Login", login_path, class: "hollow button" %>
+              <%= link_to "Login", "/auth/github", class: "hollow button" %>
             <% end %>
           </li>
         </ul>
