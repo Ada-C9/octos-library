@@ -25,5 +25,5 @@ Rails.application.routes.draw do
   # resources :books, only: [:index, :new, :create]
   # resources :authors, except: [:destroy]
 
-  get "/auth/:provider/callback", to: "sessions#create"
+  get "/auth/:provider/callback", to: "sessions#create", as: 'auth_callback'
 end
