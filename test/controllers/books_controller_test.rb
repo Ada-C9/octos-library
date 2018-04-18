@@ -1,7 +1,11 @@
 require "test_helper"
 
 describe BooksController do
+  # We split our controller tests in two: those that
+  # have the user logged in, and those that do not.
   describe 'logged in user' do
+    # We can keep all of our old tests, and add a login
+    # step before to make them continue to work
     before do
       login(User.first)
     end
@@ -202,6 +206,13 @@ describe BooksController do
   end
 
   describe 'guest user' do
+    # For the guest user tests, we include one test for
+    # each action that requires logging in, checking
+    # that we got an error status code back
+
+    # The rule we've implemented is that index and show
+    # are fine for a guest user, but you must be logged in
+    # to create, edit or destroy a book.
     it 'rejects requests for new book form' do
       get new_book_path
       must_respond_with :unauthorized

@@ -32,7 +32,8 @@ class ActiveSupport::TestCase
   end
 
   # Test helper method to generate a mock auth hash
-  # for fixture data
+  # from an instance of the User model
+  # The structure should match what we get from GitHub
   def mock_auth_hash(user)
     return {
       provider: user.provider,
@@ -45,8 +46,16 @@ class ActiveSupport::TestCase
   end
 
   def login(user)
+    # Tell OmniAuth to use this user's info when it sees
+    # an auth callback from github
     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(user))
+
+    # Send a login request for that user
+    # Note that we're using the named path for the callback, as defined
+    # in the `as:` clause in `config/routes.rb`
     get auth_callback_path(:github)
+
+    # In our books app, logging in should always redirect
     must_redirect_to root_path
   end
 end
