@@ -1,6 +1,10 @@
 class BooksController < ApplicationController
   before_action :find_book, only: [:show, :edit, :update, :destroy]
 
+  # Use a controller filter to manage authorization
+  # require_login is a method we wrote in the ApplicationController
+  before_action :require_login, except: [:index, :show]
+
   def index
     if params[:author_id]
       # Have an author id
